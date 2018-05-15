@@ -13,11 +13,13 @@
 
 	else {
 
+		$db  = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
 		return array (
-			'db_host' => 'us-cdbr-iron-east-04.cleardb.net',
-			'db_uname' => 'bae64b4ce71f68',
-			'db_pword' => '8f99cc3',
-			'db_schema' => 'heroku_c5c49419373ab1e',
+			'db_host' => $db["host"],
+			'db_uname' => $db["user"],
+			'db_pword' => $db["pass"],
+			'db_schema' => substr($db["path"],1),
 			'domain' => 'https://jrurlshortener.herokuapp.com'
 		);
 
