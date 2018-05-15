@@ -21,6 +21,8 @@ class main {
 		$this->database->_set('password', $this->config['db_pword']);
 		$this->database->_set('database', $this->config['db_schema']);
 
+		var_dump($this->config);
+
 		if(!$this->database->_connect()) {
 			die('ERROR');
 		}
