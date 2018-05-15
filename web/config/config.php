@@ -17,7 +17,7 @@
 			'db_host' => 'us-cdbr-iron-east-04.cleardb.net',
 			'db_uname' => 'bae64b4ce71f68',
 			'db_pword' => '8f99cc3',
-			'db_schema' => 'jrurlshortener',
+			'db_schema' => 'heroku_c5c49419373ab1e',
 			'domain' => 'https://jrurlshortener.herokuapp.com'
 		);
 
