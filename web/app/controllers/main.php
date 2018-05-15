@@ -81,6 +81,31 @@ class main {
 
 	}
 
+	private function db_insert($host, $uname, $pword, $db , $url) {
+
+		$database = new Database();
+
+		$database->_set('hostname' , $host);
+		$database->_set('uname', $uname)
+		$database->_set('password', $pword);
+		$database->_set('database', $db);
+
+		$database->_connect();
+
+	}
+
+
+	private function db_select($host, $uname, $pword, $db) {
+
+		$database = new Database();
+
+		$database->_set('hostname' , $host);
+		$database->_set('uname', $uname)
+		$database->_set('password', $pword);
+		$database->_set('database', $db);
+
+		$database->_connect();
+	}
 
 }
 

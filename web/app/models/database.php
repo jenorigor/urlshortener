@@ -68,7 +68,7 @@
 		/* Getter */
 		public function _get( $key = '') {
 
-			return $this->key;
+			return $this->$key;
 		
 		}
 
