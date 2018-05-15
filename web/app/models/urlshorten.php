@@ -4,7 +4,6 @@
 
 	class urlshorten {
 
-		private $url;
 		private $shortened_url;
 
 		/* Constructor */

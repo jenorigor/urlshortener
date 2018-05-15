@@ -35,9 +35,9 @@
 
 		    $urls = $stmt->get_result();
 
-		    while ($shorturl = $result->fetch_assoc()) {
+		    while ($shorturl = $urls->fetch_assoc()) {
 
-		    	return $shorturl['shorturl'];
+		    	return $shorturl['url'];
 
 		    }
 
@@ -50,7 +50,7 @@
 
 			$sql = 'INSERT INTO db_url(url,shorturl) VALUES (?, ?)';
 			
-			$stmt = $conn->prepare($sql);
+			$stmt = $this->con->prepare($sql);
 			
 			$stmt->bind_param("ss", $url, $shorturl);
 

@@ -4,6 +4,7 @@ class main {
 
 	private $config = array();
 	private $validator;
+	private $database;
 	
 
 	/* Constructor */
@@ -13,6 +14,18 @@ class main {
 
 		$this->validator = new Security();
 
+		$this->database = new Database();
+
+		$this->database->_set('hostname' , $this->config['db_host']);
+		$this->database->_set('uname', $this->config['db_uname']);
+		$this->database->_set('password', $this->config['db_pword']);
+		$this->database->_set('database', $this->config['db_schema']);
+
+		if(!$this->database->_connect()) {
+			die();
+		}
+
+	
 	}
 
 	public function _initialize() {
@@ -20,18 +33,28 @@ class main {
 		/* Check if POST is set */
 		$json = json_decode(file_get_contents('php://input'));
 		
-		/* Shorten URL if url exists */
+		/* Shorten URL if url is valid */
 		if(isset($json->url)) {
 
 			if($this->validator->_URLisValid($json->url)) {
-				$shortenedurl = $this->_shortenurl($json->url);
+				$shortenedurl = $this->_shortenurl();
 
-				$valid = array();
-				$valid ['success'] = true;
-				$valid ['url'] = $this->config['domain'].'/'.$shortenedurl;
+				if($this->db_insert($json->url, $shortenedurl)) {
+					$valid = array();
+					$valid ['success'] = true;
+					$valid ['url'] = $this->config['domain'].'/'.$shortenedurl;
 
-				echo json_encode($valid);
-				return;
+					echo json_encode($valid);
+					return;
+				}
+
+				else {
+					$invalid = array();
+					$invalid['success'] = false;
+
+					echo json_encode($invalid);
+					return;
+				}
 
 			}
 
@@ -53,9 +76,19 @@ class main {
 		/* Know if URL has a string concatenate */
 		if(sizeof($request) > 1 && isset($request[1]) && $request[1] != '') {
 
-			/* If there is a string, retrieve url if it exists, then redirect */
-			header("Location: https://www.pandoralabs.net");
-			die();
+			/* Find shortened url in database */
+			$url = $this->db_select($request[1]);
+
+			if($url) {
+				/* If there is a string, retrieve url if it exists, then redirect */
+				header("Location: ".$url);
+				die();
+			}
+
+			else {
+				header("Location: ".$this->config['domain']);
+				die();
+			}
 		
 		}
 
@@ -63,7 +96,7 @@ class main {
 
 			/* If there are not strings */
 			require dirname(__FILE__).'/../views/main-view.php';
-			exit();
+			die();
 		}	
 
 
@@ -71,40 +104,25 @@ class main {
 	}
 
 
-	private function _shortenurl( $url) {
+	private function _shortenurl() {
 
 		$shortenurl = new Urlshorten();
-		$shortenurl->_set('url' , $url);
-
 		return $shortenurl->_get('shortened_url');
 
 
 	}
 
-	private function db_insert($host, $uname, $pword, $db , $url) {
+	private function db_insert($url ,  $shortenedurl) {
 
-		$database = new Database();
+		return $this->database->_insert($url, $shortenedurl);
 
-		$database->_set('hostname' , $host);
-		$database->_set('uname', $uname)
-		$database->_set('password', $pword);
-		$database->_set('database', $db);
-
-		$database->_connect();
-
-	}
+	}	
 
 
-	private function db_select($host, $uname, $pword, $db) {
+	private function db_select($url) {
 
-		$database = new Database();
+		return $this->database->_select($url);
 
-		$database->_set('hostname' , $host);
-		$database->_set('uname', $uname)
-		$database->_set('password', $pword);
-		$database->_set('database', $db);
-
-		$database->_connect();
 	}
 
 }
