@@ -22,7 +22,7 @@ class main {
 		$this->database->_set('database', $this->config['db_schema']);
 
 		if(!$this->database->_connect()) {
-			die();
+			die('ERROR');
 		}
 
 	
