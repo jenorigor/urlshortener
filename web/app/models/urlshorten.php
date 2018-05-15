@@ -8,9 +8,9 @@
 		private $shortened_url;
 
 		/* Constructor */
-		public function __construct( $length = 5) {
+		public function __construct( $length = 2) {
 
-			$this->shortened_url = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890'), $length);
+			$this->shortened_url = $this->generateRandomString(8);
 
 		}
 
@@ -24,8 +24,21 @@
 		/* Getter */
 		public function _get( $key = '') {
 
-			return $this->key;
+			return $this->$key;
 		
+		}
+
+		/* Random String */ 
+		private function generateRandomString($length = 5) {
+
+		    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890';
+		    $charactersLength = strlen($characters);
+		    $randomString = '';
+		    for ($i = 0; $i < $length; $i++) {
+		        $randomString .= $characters[rand(0, $charactersLength - 1)];
+		    }
+		    return $randomString;
+
 		}
 
 	}

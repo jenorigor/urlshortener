@@ -3,15 +3,49 @@
 class main {
 
 	private $config = array();
+	private $validator;
+	
 
 	/* Constructor */
 	public function __construct() {
 			
 		$this->config = require dirname(__FILE__)."/../../config/config.php";
 
+		$this->validator = new Security();
+
 	}
 
 	public function _initialize() {
+
+		/* Check if POST is set */
+		$json = json_decode(file_get_contents('php://input'));
+		
+		/* Shorten URL if url exists */
+		if(isset($json->url)) {
+
+			if($this->validator->_URLisValid($json->url)) {
+				$shortenedurl = $this->_shortenurl($json->url);
+
+				$valid = array();
+				$valid ['success'] = true;
+				$valid ['url'] = $this->config['domain'].'/'.$shortenedurl;
+
+				echo json_encode($valid);
+				return;
+
+			}
+
+			else {
+
+				$invalid = array();
+				$invalid['success'] = false;
+
+				echo json_encode($invalid);
+				return;
+
+			}
+
+		}
 
 		/* Check URI if needs redirection */
 		$request = explode('/',$_SERVER['REQUEST_URI']);
@@ -37,11 +71,14 @@ class main {
 	}
 
 
-	public function _shortenurl() {
+	private function _shortenurl( $url) {
 
-		$request = file_get_contents('php://input');
+		$shortenurl = new Urlshorten();
+		$shortenurl->_set('url' , $url);
 
-		
+		return $shortenurl->_get('shortened_url');
+
+
 	}
 
 
