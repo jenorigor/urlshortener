@@ -47,6 +47,7 @@ app.controller('urlcontroller' , function($scope , $http) {
 				$scope.valid = true;
 				$scope.error = false;
 				$scope.newurl = response.data.url;
+				$scope.url = '';
 
 			}
 
