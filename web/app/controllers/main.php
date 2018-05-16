@@ -22,7 +22,7 @@ class main {
 		$this->database->_set('database', $this->config['db_schema']);
 
 		if(!$this->database->_connect()) {
-			die();
+			die('ERROR : Cannot connect to Database');
 		}
 
 	
@@ -82,12 +82,12 @@ class main {
 			if($url) {
 				/* If there is a string, retrieve url if it exists, then redirect */
 				header("Location: ".$url);
-				die();
+				return;
 			}
 
 			else {
 				header("Location: ".$this->config['domain']);
-				die();
+				return;
 			}
 		
 		}
@@ -96,7 +96,7 @@ class main {
 
 			/* If there are not strings */
 			require dirname(__FILE__).'/../views/main-view.php';
-			die();
+			return;
 		}	
 
 

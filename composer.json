@@ -6,6 +6,10 @@
   "require": {
       "ext-gettext": "*"
    },
+  
+  "require" : {
+      "php": ">=6"
+   },
 
    "require-dev": {
     	"heroku/heroku-buildpack-php": "*",
