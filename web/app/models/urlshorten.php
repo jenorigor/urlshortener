@@ -7,10 +7,12 @@
 		private $shortened_url;
 
 		/* Constructor */
-		public function __construct( $length = 2) {
+		public function __construct( $length = 7) {
 
-			$this->shortened_url = $this->generateRandomString(8);
+			if(is_int($length))
+			$this->shortened_url = $this->generateRandomString($length);
 
+			else $this->shortened_url = $this->generateRandomString(7);
 		}
 
 		/* Setter */
@@ -28,7 +30,7 @@
 		}
 
 		/* Random String */ 
-		private function generateRandomString($length = 5) {
+		private function generateRandomString($length = 7) {
 
 		    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890';
 		    $charactersLength = strlen($characters);

@@ -1,4 +1,10 @@
 {
+  "autoload" : {
+      "classmap": [
+           "web/app/models"
+       ]   
+  },
+
   "require": {
       "ext-mysql": "*"
   },
