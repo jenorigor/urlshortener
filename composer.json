@@ -1,13 +1,14 @@
 {
-  	"require": {
-    	"ext-mysql": "*"
-  	},
+  "require": {
+      "ext-mysql": "*"
+  },
 
-  	"require": {
+  "require": {
       "ext-gettext": "*"
-   	},
+   },
 
-   	"require-dev": {
-    	"heroku/heroku-buildpack-php": "*"
-  	}
+   "require-dev": {
+    	"heroku/heroku-buildpack-php": "*",
+        "phpunit/phpunit": "^6"
+   }
 }
