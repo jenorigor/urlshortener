@@ -40,7 +40,7 @@ app.controller('urlcontroller' , function($scope , $http) {
 
 				$scope.error = true;
 				$scope.valid = false;
-
+				$scope.url = '';
 			}
 
 			else {

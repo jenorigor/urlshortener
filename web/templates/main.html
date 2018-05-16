@@ -27,7 +27,7 @@
 					<div class="input-group">
 					  <input type="text" ng-model="url" class="form-control" placeholder="Shorten URL">
 					  <span class="input-group-btn">
-						<button class="form-control btn btn-primary" type="button" ng-bind-html="shortenbtn" ng-disabled='url=="" || shortbtndisabled' ng-click="shorten()"></button>
+						<button class="form-control btn btn-primary" type="button" ng-bind-html="shortenbtn" ng-disabled="url=='' || shortbtndisabled" ng-click="shorten()"></button>
 					  </span>
 					</div>
 				</div>
