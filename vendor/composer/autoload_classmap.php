@@ -549,6 +549,7 @@ return array(
     'TheSeer\\Tokenizer\\Tokenizer' => $vendorDir . '/theseer/tokenizer/src/Tokenizer.php',
     'TheSeer\\Tokenizer\\XMLSerializer' => $vendorDir . '/theseer/tokenizer/src/XMLSerializer.php',
     'database' => $baseDir . '/web/app/models/database.php',
+    'main' => $baseDir . '/web/app/controllers/main.php',
     'security' => $baseDir . '/web/app/models/security.php',
     'urlshorten' => $baseDir . '/web/app/models/urlshorten.php',
 );
