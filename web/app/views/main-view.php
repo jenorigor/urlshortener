@@ -36,7 +36,7 @@
 				border-color: #77a2a0;
 			}
 
-			.btn-primary {
+			.btn-primary, .btn-primary.disabled, .btn-primary:disabled  {
 				background-color: #95bbb9;
     			border-color: #95bbb9;
 			}

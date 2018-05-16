@@ -21,6 +21,7 @@ app.controller('urlcontroller' , function($scope , $http) {
 	$scope.shortbtndisabled = false;
 	$scope.valid = false;
 	$scope.error = false;
+	$scope.url = '';
 
 	$scope.shorten = function () {
 

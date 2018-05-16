@@ -36,10 +36,12 @@ class main {
 		/* Shorten URL if url is valid */
 		if(isset($json->url)) {
 
-			if($this->validator->_URLisValid($json->url)) {
+			$sanitized_url = $this->validator->xss_clean_url($json->url) ;
+			
+			if($this->validator->_URLisValid($sanitized_url)) {
 				$shortenedurl = $this->_shortenurl();
 
-				if($this->db_insert($json->url, $shortenedurl)) {
+				if($this->db_insert( $sanitized_url , $shortenedurl)) {
 					$valid = array();
 					$valid ['success'] = true;
 					$valid ['url'] = $this->config['domain'].'/'.$shortenedurl;
@@ -89,7 +91,7 @@ class main {
 				header("Location: ".$this->config['domain']);
 				return;
 			}
-		
+	
 		}
 
 		else{
