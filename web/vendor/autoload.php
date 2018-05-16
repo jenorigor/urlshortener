@@ -1,6 +1,6 @@
 <?php
 	
-	define('STATUS', 'production');
+	define('STATUS', 'development');
 
 	switch(STATUS) {
 

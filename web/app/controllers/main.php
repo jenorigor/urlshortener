@@ -12,9 +12,9 @@ class main {
 			
 		$this->config = require dirname(__FILE__)."/../../config/config.php";
 
-		$this->validator = new Security();
+		$this->validator = new security();
 
-		$this->database = new Database();
+		$this->database = new database();
 
 		$this->database->_set('hostname' , $this->config['db_host']);
 		$this->database->_set('uname', $this->config['db_uname']);
@@ -47,7 +47,7 @@ class main {
 					$valid ['url'] = $this->config['domain'].'/'.$shortenedurl;
 
 					echo json_encode($valid);
-					return;
+					return true;
 				}
 
 				else {
@@ -55,7 +55,7 @@ class main {
 					$invalid['success'] = false;
 
 					echo json_encode($invalid);
-					return;
+					return false;
 				}
 
 			}
@@ -66,7 +66,7 @@ class main {
 				$invalid['success'] = false;
 
 				echo json_encode($invalid);
-				return;
+				return false;
 
 			}
 
@@ -108,7 +108,7 @@ class main {
 
 	private function _shortenurl() {
 
-		$shortenurl = new Urlshorten();
+		$shortenurl = new urlshorten();
 		return $shortenurl->_get('shortened_url');
 
 
